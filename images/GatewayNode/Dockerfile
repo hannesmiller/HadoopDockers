@@ -1,1 +1,1 @@
-FROM apache/hadoop:0.8.1
+FROM apache/hadoop:3

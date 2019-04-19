@@ -1,1 +1,1 @@
-FROM centos
+FROM apache/hadoop:3
