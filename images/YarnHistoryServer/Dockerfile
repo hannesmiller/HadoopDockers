@@ -1,0 +1,1 @@
+FROM apache/hadoop:0.8.1
