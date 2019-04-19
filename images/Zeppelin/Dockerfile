@@ -1,1 +1,1 @@
-FROM centos
+FROM apache/zeppelin:0.8.1
