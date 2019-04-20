@@ -1,8 +1,8 @@
-version: "2"
+version: "1"
 
 services:
   namenode:
-    build: ./namenode
+    build: ./HdfsNameNode
     hostname: namenode
     container_name: namenode
     volumes:
@@ -13,7 +13,7 @@ services:
       - ./hadoop.env
 
   resourcemanager:
-    build: ./resourcemanager
+    build: ./YarnResourceManager
     hostname: resourcemanager
     container_name: resourcemanager
     depends_on:
@@ -26,7 +26,7 @@ services:
       - ./hadoop.env
 
   historyserver:
-    build: ./historyserver
+    build: ./YarnHistoryServer
     hostname: historyserver
     container_name: historyserver
     volumes:
@@ -41,7 +41,7 @@ services:
       - ./hadoop.env
 
   nodemanager1:
-    build: ./nodemanager
+    build: ./YarnNodeManager
     hostname: nodemanager1
     container_name: nodemanager1
     depends_on:
@@ -56,7 +56,7 @@ services:
       - ./hadoop.env
 
   datanode1:
-    build: ./datanode
+    build: ./HdfsDataNode
     hostname: datanode1
     container_name: datanode1
     depends_on:
@@ -69,7 +69,7 @@ services:
       - ./hadoop.env
 
   datanode2:
-    build: ./datanode
+    build: ./HdfsDataNode
     hostname: datanode2
     container_name: datanode2
     depends_on:
@@ -82,7 +82,7 @@ services:
       - ./hadoop.env
 
   datanode3:
-    build: ./datanode
+    build: ./HdfsDataNode
     hostname: datanode3
     container_name: datanode3
     depends_on:
