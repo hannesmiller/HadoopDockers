@@ -9,7 +9,7 @@ services:
     mem_limit: 1g
     mem_reservation: 1g
     volumes:
-      - ./data/hivemetastore_mysql:/var/lib/mysql
+      - ./data/hivemetastoredb:/var/lib/mysql
     environment:
       - MYSQL_ROOT_PASSWORD=mysql
     ports:
