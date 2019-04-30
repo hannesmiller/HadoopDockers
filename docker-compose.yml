@@ -1,9 +1,12 @@
-version: "3.7"
+version: "2.2"
 
 services:
   namenode:
     build: ./namenode
     hostname: namenode
+    cpus: 0.25
+    mem_limit: 500m
+    mem_reservation: 500m
     container_name: namenode
     volumes:
       - ./data/namenode:/hdfsdata
@@ -15,6 +18,9 @@ services:
   resourcemanager:
     build: ./resourcemanager
     hostname: resourcemanager
+    cpus: 0.25
+    mem_limit: 500m
+    mem_reservation: 500m
     container_name: resourcemanager
     depends_on:
       - "namenode"
@@ -27,6 +33,9 @@ services:
     build: ./datanode
     hostname: datanode1
     container_name: datanode1
+    cpus: 0.5
+    mem_limit: 500m
+    mem_reservation: 500m
     depends_on:
       - "namenode"
     links:
@@ -37,6 +46,9 @@ services:
   datanode2:
     build: ./datanode
     hostname: datanode2
+    cpus: 0.5
+    mem_limit: 500m
+    mem_reservation: 500m
     container_name: datanode2
     depends_on:
       - "namenode"
@@ -48,6 +60,9 @@ services:
   datanode3:
     build: ./datanode
     hostname: datanode3
+    cpus: 0.5
+    mem_limit: 500m
+    mem_reservation: 500m
     container_name: datanode3
     depends_on:
       - "namenode"
@@ -59,15 +74,9 @@ services:
   nodemanager1:
     build: ./nodemanager
     hostname: nodemanager1
-    container_name: nodemanager1
-    deploy:
-      resources:
-        limits:
-          cpus: '1.0'
-          memory: 4G
-        reservations:
-          cpus: '1.0'
-          memory: 4G
+    cpus: 1.0
+    mem_limit: 4g
+    mem_reservation: 4g
     depends_on:
       - "resourcemanager"
     links:
@@ -77,14 +86,9 @@ services:
     build: ./nodemanager
     hostname: nodemanager2
     container_name: nodemanager2
-    deploy:
-      resources:
-        limits:
-          cpus: '1.0'
-          memory: 4G
-        reservations:
-          cpus: '1.0'
-          memory: 4G
+    cpus: 1.0
+    mem_limit: 4g
+    mem_reservation: 4g
     depends_on:
       - "resourcemanager"
     links:
@@ -94,14 +98,9 @@ services:
     build: ./nodemanager
     hostname: nodemanager3
     container_name: nodemanager3
-    deploy:
-      resources:
-        limits:
-          cpus: '1.0'
-          memory: 4G
-        reservations:
-          cpus: '1.0'
-          memory: 4G
+    cpus: 1.0
+    mem_limit: 4g
+    mem_reservation: 4g
     depends_on:
       - "resourcemanager"
     links:
