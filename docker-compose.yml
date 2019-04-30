@@ -1,6 +1,20 @@
 version: "2.2"
 
 services:
+  hivemetastoredb:
+    image:  mysql:8.0.16
+    hostname: hivemetastoredb
+    container_name: hivemetastoredb
+    cpus: 0.50
+    mem_limit: 1g
+    mem_reservation: 1g
+    volumes:
+      - ./data/hivemetastore_mysql:/var/lib/mysql
+    environment:
+      - MYSQL_ROOT_PASSWORD=mysql
+    ports:
+      - "53306:3306"  
+      
   namenode:
     build: ./namenode
     hostname: namenode
@@ -111,3 +125,4 @@ services:
       - "resourcemanager"
     ports:
       - "58044:8042"
+
