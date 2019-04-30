@@ -1,0 +1,108 @@
+version: "3.7"
+
+services:
+  namenode:
+    build: ./namenode
+    hostname: namenode
+    container_name: namenode
+    volumes:
+      - ./data/namenode:/hdfsdata
+    environment:
+      - CLUSTER_NAME=test
+    ports:
+      - "50070:50070"
+
+  resourcemanager:
+    build: ./resourcemanager
+    hostname: resourcemanager
+    container_name: resourcemanager
+    depends_on:
+      - "namenode"
+    links:
+      - "namenode"
+    ports:
+      - "58088:8088"
+
+  datanode1:
+    build: ./datanode
+    hostname: datanode1
+    container_name: datanode1
+    depends_on:
+      - "namenode"
+    links:
+      - "namenode"
+    volumes:
+      - ./data/datanode1:/hdfsdata
+
+  datanode2:
+    build: ./datanode
+    hostname: datanode2
+    container_name: datanode2
+    depends_on:
+      - "namenode"
+    links:
+      - "namenode"
+    volumes:
+      - ./data/datanode2:/hdfsdata
+
+  datanode3:
+    build: ./datanode
+    hostname: datanode3
+    container_name: datanode3
+    depends_on:
+      - "namenode"
+    links:
+      - "namenode"
+    volumes:
+      - ./data/datanode3:/hdfsdata
+     
+  nodemanager1:
+    build: ./nodemanager
+    hostname: nodemanager1
+    container_name: nodemanager1
+    deploy:
+      resources:
+        limits:
+          cpus: '1.0'
+          memory: 4G
+        reservations:
+          cpus: '1.0'
+          memory: 4G
+    depends_on:
+      - "resourcemanager"
+    links:
+      - "resourcemanager"
+
+  nodemanager2:
+    build: ./nodemanager
+    hostname: nodemanager2
+    container_name: nodemanager2
+    deploy:
+      resources:
+        limits:
+          cpus: '1.0'
+          memory: 4G
+        reservations:
+          cpus: '1.0'
+          memory: 4G
+    depends_on:
+      - "resourcemanager"
+    links:
+      - "resourcemanager"
+
+  nodemanager3:
+    build: ./nodemanager
+    hostname: nodemanager3
+    container_name: nodemanager3
+    deploy:
+      resources:
+        limits:
+          cpus: '1.0'
+          memory: 4G
+        reservations:
+          cpus: '1.0'
+          memory: 4G
+    depends_on:
+      - "resourcemanager"
+    links:
+      - "resourcemanager"
