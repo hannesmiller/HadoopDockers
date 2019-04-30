@@ -13,7 +13,7 @@ services:
     environment:
       - CLUSTER_NAME=test
     ports:
-      - "50070:50070"
+      - "59870:9870"
 
   resourcemanager:
     build: ./resourcemanager
@@ -81,6 +81,8 @@ services:
       - "resourcemanager"
     links:
       - "resourcemanager"
+    ports:
+      - "58042:8042"
 
   nodemanager2:
     build: ./nodemanager
@@ -93,6 +95,8 @@ services:
       - "resourcemanager"
     links:
       - "resourcemanager"
+    ports:
+      - "58043:8042"
 
   nodemanager3:
     build: ./nodemanager
@@ -105,3 +109,5 @@ services:
       - "resourcemanager"
     links:
       - "resourcemanager"
+    ports:
+      - "58044:8042"
